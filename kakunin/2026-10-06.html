@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>HP確認事項</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F7F7F5; --card:#FFFFFF; --ink:#13213A; --sub:#5B6576; --line:#E3E5EA;
+  --navy:#0B2545; --accent:#E8832F; --accent-ink:#FFFFFF; --chip:#EEF1F6; --warn:#FFF4E8; --warn-ink:#8A4A10;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0E1420; --card:#161E2D; --ink:#E8ECF3; --sub:#9AA5B8; --line:#26314A;
+    --navy:#9DB8E6; --accent:#F29A4E; --accent-ink:#1A0F05; --chip:#1E2940; --warn:#2A1E12; --warn-ink:#F2C08F;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0E1420; --card:#161E2D; --ink:#E8ECF3; --sub:#9AA5B8; --line:#26314A;
+  --navy:#9DB8E6; --accent:#F29A4E; --accent-ink:#1A0F05; --chip:#1E2940; --warn:#2A1E12; --warn-ink:#F2C08F;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans JP",system-ui,sans-serif;font-size:16px;line-height:1.75}
+.wrap{max-width:760px;margin:0 auto;padding:28px 16px 64px}
+header .eyebrow{font-size:12px;letter-spacing:.14em;color:var(--sub);font-weight:700}
+h1{font-size:24px;font-weight:900;margin:4px 0 10px;color:var(--navy);line-height:1.4}
+.lead{color:var(--sub);margin:0 0 14px}
+.howto{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:14px}
+.howto b{color:var(--navy)}
+.toplink{display:inline-block;margin-top:10px;font-weight:700;color:var(--navy)}
+h2{font-size:18px;font-weight:900;margin:36px 0 12px;padding-left:10px;border-left:5px solid var(--accent);color:var(--navy)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin:0 0 12px}
+.q{display:flex;gap:12px;align-items:flex-start}
+.num{flex:0 0 30px;height:30px;border-radius:50%;background:var(--navy);color:var(--bg);font-weight:900;display:grid;place-items:center;font-size:14px}
+.qt{font-weight:700;margin:2px 0 6px}
+.now{font-size:13px;color:var(--sub);background:var(--chip);border-radius:8px;padding:6px 10px;margin:6px 0 10px}
+.now b{color:var(--ink);font-weight:500}
+.go{display:inline-flex;align-items:center;gap:6px;background:var(--accent);color:var(--accent-ink);text-decoration:none;font-weight:700;font-size:14px;padding:8px 14px;border-radius:999px;margin:2px 6px 2px 0}
+.go.sub{background:transparent;color:var(--navy);border:1.5px solid var(--navy)}
+.go:focus-visible{outline:3px solid var(--navy);outline-offset:2px}
+.note{background:var(--warn);color:var(--warn-ink);border-radius:10px;padding:10px 14px;font-size:13px;margin-top:12px}
+ul.mini{margin:6px 0 0;padding-left:1.2em}
+ul.mini li{margin:2px 0}
+footer{margin-top:40px;font-size:13px;color:var(--sub);text-align:center}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">デーリー東北 おいらせ専売所 ホームページ</div>
+  <h1>公開前の確認事項</h1>
+  <p class="lead">工藤社長へ ／ 2026年10月6日 北上</p>
+  <div class="howto">
+    各項目の<b>オレンジのボタン</b>を押すと、ホームページの該当する場所が開きます。実際の画面を見ながらご判断ください。<br>
+    ※今のホームページは<b>見本（仮の文章・仮の数字）</b>です。いただいたお答えをもとに文章を書き直します。
+    <br><a class="toplink" href="https://nylonman1109-prog.github.io/oirase-senbaisho-web/mockup/案2_物流ベンチャー/index.html" target="_blank" rel="noopener">ホームページのトップを開く →</a>
+  </div>
+</header>
+
+<h2>ご判断いただきたいこと</h2>
+
+<div class="card"><div class="q"><div class="num">1</div><div>
+  <p class="qt">新聞の配達エリア</p>
+  <p>「おいらせ町全域・八戸市市川町」と書いて問題ないでしょうか。一部の地区だけであれば、その範囲を教えてください。</p>
+  <div class="now">今の表示：<b>おいらせ町／八戸市市川町</b></div>
+  <a class="go" href="https://nylonman1109-prog.github.io/oirase-senbaisho-web/mockup/案2_物流ベンチャー/newspaper.html#area" target="_blank" rel="noopener">配達エリアを見る →</a>
+</div></div></div>
+
+<div class="card"><div class="q"><div class="num">2</div><div>
+  <p class="qt">配達部数（世帯数）を載せてよいか</p>
+  <p>載せる場合は「約○部」の形にします。載せない場合は数字を外して、言葉で表現します。</p>
+  <div class="now">今の表示：<b>毎朝のお届け先 0,000戸（仮）</b></div>
+  <a class="go" href="https://nylonman1109-prog.github.io/oirase-senbaisho-web/mockup/案2_物流ベンチャー/business.html#network" target="_blank" rel="noopener">数字の欄を見る →</a>
+</div></div></div>
+
+<div class="card"><div class="q"><div class="num">3</div><div>
+  <p class="qt">宅配の仕事の書き方</p>
+  <p>社名は出さずに「大手運送会社の協力会社」と書いてもよいでしょうか。</p>
+  <a class="go" href="https://nylonman1109-prog.github.io/oirase-senbaisho-web/mockup/案2_物流ベンチャー/business.html#services" target="_blank" rel="noopener">宅配・物流の欄を見る →</a>
+</div></div></div>
+
+<div class="card"><div class="q"><div class="num">4</div><div>
+  <p class="qt">軽貨物で、今後新しく受けたい仕事</p>
+  <p>定期便・スポット配送・店舗間の配送など、企業向けに載せたいものはありますか。</p>
+  <a class="go" href="https://nylonman1109-prog.github.io/oirase-senbaisho-web/mockup/案2_物流ベンチャー/business.html#services" target="_blank" rel="noopener">宅配・物流の欄を見る →</a>
+</div></div></div>
+
+<div class="card"><div class="q"><div class="num">5</div><div>
+  <p class="qt">折込広告の受け方</p>
+  <p>企業から当社へ直接ご依頼いただく形で載せてよいでしょうか。少ない部数や、エリアを絞ったご依頼も受けられますか。</p>
+  <div class="now">今の表示：<b>配布エリア・部数・料金はご相談ください（仮）</b></div>
+  <a class="go" href="https://nylonman1109-prog.github.io/oirase-senbaisho-web/mockup/案2_物流ベンチャー/business.html#:~:text=INSERT%20ADS" target="_blank" rel="noopener">折込広告の欄を見る →</a>
+</div></div></div>
+
+<div class="card"><div class="q"><div class="num">6</div><div>
+  <p class="qt">新聞の購読料を載せてよいか</p>
+  <div class="now">今の表示：<b>購読料はお電話でご案内します（仮）</b></div>
+  <a class="go" href="https://nylonman1109-prog.github.io/oirase-senbaisho-web/mockup/案2_物流ベンチャー/newspaper.html#apply" target="_blank" rel="noopener">お申し込みの欄を見る →</a>
+</div></div></div>
+
+<div class="card"><div class="q"><div class="num">7</div><div>
+  <p class="qt">AI事業部</p>
+  <ul class="mini">
+    <li>正式な部署名と、立ち上げの時期</li>
+    <li>社内の取り組み（点呼記録のアプリ化など）を、どこまで載せてよいか</li>
+    <li>地域の会社からのご相談を受け付けると書いてよいか（その場合の窓口）</li>
+  </ul>
+  <div class="now">このページは、「現場の手間を減らす・会社のデータの扱い方を変える」という内容で大きく書き足す予定です</div>
+  <a class="go" href="https://nylonman1109-prog.github.io/oirase-senbaisho-web/mockup/案2_物流ベンチャー/ai.html" target="_blank" rel="noopener">AI事業部のページを見る →</a>
+</div></div></div>
+
+<div class="card"><div class="q"><div class="num">8</div><div>
+  <p class="qt">採用ページ</p>
+  <p>載せるかどうかと、募集職種・条件・応募方法をご相談させてください。</p>
+  <div class="now">今の表示：<b>職種・時間・条件はすべて仮</b></div>
+  <a class="go" href="https://nylonman1109-prog.github.io/oirase-senbaisho-web/mockup/案2_物流ベンチャー/recruit.html#jobs" target="_blank" rel="noopener">採用ページを見る →</a>
+</div></div></div>
+
+<div class="card"><div class="q"><div class="num">9</div><div>
+  <p class="qt">まごころサポートの目標を載せてよいか</p>
+  <p>「孤独死してしまうシニアの方を0にする」（まごころサポート本部の2022年の記事より）を、見守りの欄に載せたいと考えています。</p>
+  <a class="go" href="https://nylonman1109-prog.github.io/oirase-senbaisho-web/mockup/案2_物流ベンチャー/magokoro.html#watch" target="_blank" rel="noopener">見守りの欄を見る →</a>
+</div></div></div>
+
+<div class="card"><div class="q"><div class="num">10</div><div>
+  <p class="qt">活動を紹介する記事のページ「おいらせ通信」（新設予定）</p>
+  <p>現場のこと・地域のこと・新しい取り組みを記事にするページを作る予定です。載せる前の確認役と、写真掲載の了解の取り方をご相談させてください。</p>
+  <div class="now">まだホームページにはありません。トップのメニューに追加する予定です</div>
+  <a class="go" href="https://nylonman1109-prog.github.io/oirase-senbaisho-web/mockup/案2_物流ベンチャー/index.html#menu" target="_blank" rel="noopener">トップのメニューを見る →</a>
+</div></div></div>
+
+<div class="card"><div class="q"><div class="num">11</div><div>
+  <p class="qt">代表あいさつを載せるか</p>
+  <p>載せる場合は、2〜3行いただけると助かります。</p>
+  <a class="go" href="https://nylonman1109-prog.github.io/oirase-senbaisho-web/mockup/案2_物流ベンチャー/company.html#outline" target="_blank" rel="noopener">会社概要を見る →</a>
+</div></div></div>
+
+<h2>教えていただきたいこと</h2>
+
+<div class="card">
+  <ul class="mini">
+    <li><b>会社の設立年</b>（今の表示：確認中）</li>
+    <li><b>従業員数</b></li>
+    <li><b>沿革に載せる出来事</b>（宅配を始めた年など）</li>
+  </ul>
+  <div style="margin-top:10px"><a class="go" href="https://nylonman1109-prog.github.io/oirase-senbaisho-web/mockup/案2_物流ベンチャー/company.html#outline" target="_blank" rel="noopener">会社概要を見る →</a></div>
+</div>
+
+<div class="card">
+  <ul class="mini">
+    <li><b>新聞配達を何年続けているか</b>（前の店主の時代も含めて）</li>
+  </ul>
+  <div style="margin-top:10px"><a class="go" href="https://nylonman1109-prog.github.io/oirase-senbaisho-web/mockup/案2_物流ベンチャー/business.html#network" target="_blank" rel="noopener">数字の欄を見る →</a></div>
+</div>
+
+<div class="card">
+  <ul class="mini">
+    <li><b>お問い合わせフォームを設けるかどうか</b>（今の表示：準備中）</li>
+  </ul>
+  <div style="margin-top:10px"><a class="go" href="https://nylonman1109-prog.github.io/oirase-senbaisho-web/mockup/案2_物流ベンチャー/contact.html#form" target="_blank" rel="noopener">フォームの欄を見る →</a></div>
+</div>
+
+<h2>進め方のご報告</h2>
+
+<div class="card">
+  <p class="qt">宅配の仕事について、郵便局の名前は出さない形で進めます</p>
+  <div class="now">今の見本にはまだ「郵便局の業務委託」と出ています。次の版で消します</div>
+  <a class="go sub" href="https://nylonman1109-prog.github.io/oirase-senbaisho-web/mockup/案2_物流ベンチャー/business.html#services" target="_blank" rel="noopener">該当の欄を見る →</a>
+</div>
+
+<div class="card">
+  <p class="qt">まごころサポートは、既存のおいらせ店のページへリンクする形にします</p>
+  <p>当社のホームページでは短く紹介して、詳しい内容とお問い合わせは既存のページへご案内します。</p>
+  <a class="go sub" href="https://nylonman1109-prog.github.io/oirase-senbaisho-web/mockup/案2_物流ベンチャー/magokoro.html" target="_blank" rel="noopener">今のまごころページ →</a>
+  <a class="go sub" href="https://shop.mikawaya21.com/shop/daily-touhoku_oirase/" target="_blank" rel="noopener">リンク先（おいらせ店のページ）→</a>
+</div>
+
+<footer>お忙しいところ恐れ入りますが、よろしくお願いいたします。<br>北上</footer>
+
+</div>
+</body>
+</html>
