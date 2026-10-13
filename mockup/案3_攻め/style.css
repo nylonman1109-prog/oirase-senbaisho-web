@@ -624,3 +624,8 @@ h1,h2,h3,h4{word-break:auto-phrase;text-wrap:balance;}
   .loop-back{border-top:2px dashed rgba(244,144,60,.65);border-radius:16px}
 }
 @media (prefers-reduced-motion:reduce){ .loop-list li,.infra-list li{transition:none} }
+
+/* ===== 2026-10-13 台本反映：トップの4部屋 ===== */
+.menu-grid.four{grid-template-columns:repeat(2,1fr)}
+@media (max-width:640px){.menu-grid.four{grid-template-columns:1fr}}
+.menu + .cta-band{margin-top:0}

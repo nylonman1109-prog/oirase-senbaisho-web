@@ -525,3 +525,18 @@ a:hover .arrow{transform:translateX(4px)}
 
 /* 見出しの改行：文節で折り返し、行の長さをそろえる（2026-09-28） */
 h1,h2,h3,h4{word-break:auto-phrase;text-wrap:balance;}
+
+/* ===== 2026-10-13 台本反映：トップの4部屋・各ページの追加パーツ ===== */
+.menu-grid.four{grid-template-columns:repeat(2,1fr)}
+@media (max-width:600px){.menu-grid.four{grid-template-columns:1fr}}
+.mcard:not(.feature):not(.dark) .badges span{color:var(--navy);background:#F2F4F7;border-color:#E3E7ED}
+.ph.noimg-box{background:linear-gradient(135deg,#0B2545,#22406B 60%,#F2994A);display:grid;place-items:center;color:#fff;font:600 12px var(--en);letter-spacing:.1em}
+.price-box{background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:26px 28px;max-width:560px;margin-top:28px}
+.price-box .fee{font-family:var(--en);font-weight:800;font-size:40px;color:var(--navy);line-height:1.2}
+.price-box .fee small{font-family:var(--jp);font-size:15px;margin-left:4px}
+.works{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px}
+.works li{list-style:none;background:var(--white);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px}
+.works .tag{font-family:var(--en);font-size:11px;font-weight:600;letter-spacing:.18em;color:var(--accent)}
+.works b{display:block;font-size:17px;margin:6px 0 4px}
+.works p{font-size:14px;color:var(--muted)}
+@media (max-width:960px){.works{grid-template-columns:1fr}}
