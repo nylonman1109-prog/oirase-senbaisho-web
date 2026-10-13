@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>3D試作 3案｜おいらせ専売所</title>
+<meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Poppins:wght@600;800;900&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Noto Sans JP",sans-serif;background:#0A0E17;color:#fff;line-height:1.8;padding:56px 16px}
+  .w{max-width:1040px;margin:0 auto}
+  .k{font:700 12px "Poppins",sans-serif;letter-spacing:.24em;color:#F4903C}
+  h1{font-size:clamp(26px,4vw,40px);font-weight:900;margin:6px 0 10px}
+  p.l{opacity:.75;font-size:14px}
+  .g{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:36px}
+  a.c{display:block;color:inherit;text-decoration:none;background:#141a26;border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:24px 22px;transition:transform .2s,border-color .2s}
+  a.c:hover{transform:translateY(-3px);border-color:#F4903C}
+  .c b{display:inline-grid;place-items:center;width:44px;height:44px;border-radius:12px;background:#F4903C;color:#0A0E17;font:900 20px "Poppins",sans-serif}
+  .c h2{font-size:20px;margin:14px 0 6px}
+  .c p{font-size:13px;opacity:.75}
+  .c small{display:block;margin-top:14px;font-size:12px;color:#F4903C;font-weight:700}
+  @media (max-width:760px){ .g{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+<div class="w">
+  <p class="k">PROTOTYPE</p>
+  <h1>スクロールで会社の中を巡る 3案</h1>
+  <p class="l">外観 → 1F折込場 → 1F出発口 → 2Fまごころ → 2F AI事業部 → 屋上 → メニュー の順に、スクロールでカメラが進みます。</p>
+  <div class="g">
+    <a class="c" href="A_本格3D/index.html"><b>A</b><h2>本格3D</h2><p>3Dの建物の中をカメラが飛んでいく。いちばん迫力があるが、いちばん重い。</p><small>建物：仮の箱 → Codexが本番版を作る</small></a>
+    <a class="c" href="B_写真疑似3D/index.html"><b>B</b><h2>写真で疑似3D</h2><p>写真に寄って、抜けて、次の部屋へ。入口や階段の写真をはさんで「進んでいく」感じを出す。</p><small>写真：今のサイトの写真で代用 → Geminiで9枚</small></a>
+    <a class="c" href="C_断面イラスト/index.html"><b>C</b><h2>断面イラスト</h2><p>ドールハウスのような断面図1枚に、カメラが部屋ごとに寄っていく。軽くて遊び心がある。</p><small>絵：Claudeの仮の絵 → Geminiで1枚</small></a>
+  </div>
+</div>
+</body>
+</html>

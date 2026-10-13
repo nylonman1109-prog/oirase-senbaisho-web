@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>B 写真で疑似3D｜おいらせ専売所 試作</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Poppins:wght@600;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../_common/ui.css">
+<style>
+  /* 写真を重ねて、寄る・抜ける・切り替わるで「中へ進んでいく」感じを出す */
+  .layer{position:absolute;inset:-2%;opacity:0;will-change:transform,opacity;
+    background:linear-gradient(160deg,#0B2545,#1d3a66 50%,#c9733a)}
+  .layer img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .layer::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,14,23,.55),rgba(10,14,23,0) 55%),linear-gradient(180deg,rgba(10,14,23,.35),rgba(10,14,23,0) 25%,rgba(10,14,23,0) 70%,rgba(10,14,23,.5))}
+  .layer .nm{position:absolute;right:14px;bottom:12px;z-index:2;font:600 11px "Poppins",sans-serif;opacity:.7;background:rgba(0,0,0,.4);padding:3px 8px;border-radius:6px}
+  .layer.fallback .nm::before{content:"仮画像 ";color:#F4903C}
+  @media (max-width:760px){ .layer::after{background:linear-gradient(180deg,rgba(10,14,23,.35),rgba(10,14,23,0) 25%,rgba(10,14,23,.2) 50%,rgba(10,14,23,.85))} .layer .nm{bottom:auto;top:64px;right:auto;left:12px} }
+</style>
+</head>
+<body>
+<div class="stage" id="stage"></div>
+
+<script type="module">
+// B：写真の重ね合わせで3Dっぽく進む。
+// 画像は ../素材/B/ に Gemini で作ったものを置く（../指示書/B_Gemini向け_写真プロンプト.md）。
+// 無い間は、今サイトで使っている写真（素材/画像/）で代用する。
+import { SCENES, setupScroll, clamp } from '../_common/scenes.js';
+
+const NEW = '../素材/B/', OLD = '../../素材/画像/';
+// origin … 次の場所へ「入っていく」ときに寄る位置（写真の中のドアや階段の位置）
+const PHOTOS = {
+  gaikan:   { file: 'B01_gaikan.jpg',   alt: 'office_exterior.jpg',      origin: '58% 62%', via: 'B02_iriguchi.jpg' },
+  orikomi:  { file: 'B03_orikomi.jpg',  alt: 'biz_sorting.jpg',          origin: '80% 50%' },
+  garage:   { file: 'B04_garage.jpg',   alt: 'biz_delivery.jpg',         origin: '20% 40%', via: 'B05_kaidan.jpg' },
+  magokoro: { file: 'B06_magokoro.jpg', alt: 'magokoro_light.jpg',       origin: '75% 45%' },
+  ai:       { file: 'B07_ai.jpg',       alt: 'recruit_team_meeting.jpg', origin: '50% 20%' },
+  okujo:    { file: 'B08_okujo.jpg',    alt: 'recruit_morning.jpg',      origin: '50% 50%' },
+  menu:     { file: 'B09_menu.jpg',     alt: 'area_aerial.jpg',          origin: '50% 50%' },
+};
+
+const stage = document.getElementById('stage');
+const layers = SCENES.map(s => {
+  const ph = PHOTOS[s.id];
+  const el = document.createElement('div');
+  el.className = 'layer';
+  el.style.transformOrigin = ph.origin;
+  el.innerHTML = `<img src="${NEW}${ph.file}" alt=""><span class="nm">${ph.file}</span>`;
+  const img = el.querySelector('img');
+  img.onerror = () => {
+    if (img.dataset.f) { img.remove(); return; }
+    img.dataset.f = 1; el.classList.add('fallback'); img.src = OLD + ph.alt;
+  };
+  stage.appendChild(el);
+  // 通過用の写真（入口・階段）。次の場所へ移る途中に一瞬だけ見せる。無ければ使わない
+  if (ph.via) {
+    const v = document.createElement('div');
+    v.className = 'layer';
+    v.innerHTML = `<img src="${NEW}${ph.via}" alt=""><span class="nm">${ph.via}</span>`;
+    v.querySelector('img').onerror = () => { v.remove(); el.via = null; };
+    stage.appendChild(v);
+    el.via = v;
+  }
+  return el;
+});
+
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const E = 0.5; // 区間の後半50%で次の写真へ切り替える
+
+setupScroll({
+  label: 'B 写真で疑似3D',
+  onProgress(p) {
+    layers.forEach((el, i) => {
+      const l = p - i; // この写真から見た進み具合
+      let op = 0, sc = 1;
+      if (l >= -E && l < 0) {              // 手前から入ってくる
+        const e = (l + E) / E; op = e; sc = 1.18 - .18 * e;
+      } else if (l >= 0 && l < 1 - E) {    // ゆっくり寄る
+        op = 1; sc = 1 + .1 * (l / (1 - E));
+      } else if (l >= 1 - E && l < 1) {    // 奥へ抜けていく
+        const e = (l - (1 - E)) / E; op = 1 - e * e; sc = 1.1 + .9 * e * e;
+      } else if (l >= 1 && i === layers.length - 1) { op = 1; sc = 1.1; }
+      if (i === layers.length - 1 && l >= 0) { op = 1; sc = 1 + .1 * clamp(l); }
+      el.style.opacity = op;
+      el.style.zIndex = l < 0 ? 2 : 1;
+      el.style.transform = reduce ? 'none' : `scale(${sc})`;
+      el.style.filter = (l > 1 - E && l < 1 && !reduce) ? `blur(${(l - (1 - E)) / E * 6}px)` : 'none';
+      if (el.via) {
+        const e = clamp((l - (1 - E) + .15) / (E + .1));
+        el.via.style.opacity = l > 1 - E - .15 && l < 1 ? Math.sin(e * Math.PI) : 0;
+        el.via.style.zIndex = 3;
+        el.via.style.transform = reduce ? 'none' : `scale(${1 + .35 * e})`;
+      }
+    });
+  }
+});
+</script>
+</body>
+</html>

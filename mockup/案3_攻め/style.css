@@ -110,6 +110,18 @@ a{color:inherit;text-decoration:none}
 .fv-scroll::after{content:"";width:1px;height:56px;background:linear-gradient(#fff,transparent);animation:sc 1.8s infinite}
 @keyframes sc{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
 /* 流れる帯 */
+/* FV：全面写真＋一言（正統派の見せ方を攻めの文字で） */
+.fv-full::before{display:none}
+.fv-bg{position:absolute;inset:0;z-index:0}
+.fv-bg img{object-position:50% 60%;transform:scale(1.06);animation:fvzoom 14s ease-out forwards}
+.fv-bg::before{content:"";position:absolute;inset:0;z-index:2;background:
+  linear-gradient(90deg,rgba(10,14,23,.82) 0%,rgba(10,14,23,.5) 45%,rgba(10,14,23,.1) 100%),
+  linear-gradient(180deg,rgba(10,14,23,.55) 0%,rgba(10,14,23,0) 30%,rgba(10,14,23,0) 65%,rgba(10,14,23,.75) 100%)}
+.fv-bg::after{z-index:3}
+@keyframes fvzoom{to{transform:scale(1)}}
+.fv-body{flex:1;position:relative;z-index:2;display:flex;align-items:flex-end;justify-content:space-between;gap:40px;padding-top:60px;padding-bottom:64px}
+.fv-full .fv-h{text-shadow:0 4px 30px rgba(0,0,0,.35)}
+.fv-full .fv-tag{position:relative;left:auto;bottom:auto;flex:none;background:rgba(255,255,255,.94)}
 .ticker{background:var(--orange);color:var(--ink);overflow:hidden;white-space:nowrap;position:relative;z-index:2}
 .ticker-in{display:inline-flex;animation:tk 32s linear infinite;padding:14px 0}
 .ticker span{font:800 15px var(--en);letter-spacing:.08em;padding:0 22px;display:inline-flex;align-items:center;gap:22px}
@@ -300,6 +312,11 @@ section{position:relative}
   .fv-cta{flex-direction:column}
   .fv-cta .btn{width:100%;min-width:0}
   .fv-photo{height:300px}
+  .fv-full{min-height:100svh}
+  .fv-body{flex-direction:column;align-items:stretch;justify-content:flex-end;gap:24px;padding-top:40px;padding-bottom:40px}
+  .fv-bg::before{background:linear-gradient(180deg,rgba(10,14,23,.45) 0%,rgba(10,14,23,.35) 35%,rgba(10,14,23,.88) 100%)}
+  .fv-full .fv-tag{display:none}
+  .fv-bg img{object-position:28% 60%}
   .gate-grid{grid-template-columns:1fr}
   .gcard,.gcard.main{min-height:300px}
   .nums-grid{grid-template-columns:1fr}
@@ -324,6 +341,7 @@ section{position:relative}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation:none!important;transition:none!important}
   .fv-h .line > span{transform:none}
+  .fv-bg img{transform:none}
   .rv{opacity:1;transform:none}
 }
 
@@ -523,3 +541,86 @@ section{position:relative}
 
 /* 見出しの改行：文節で折り返し、行の長さをそろえる（2026-09-28） */
 h1,h2,h3,h4{word-break:auto-phrase;text-wrap:balance;}
+
+/* ===== 図解（2026-10-08 追加）===== */
+/* ② 配達網を土台に5つの事業（企業の方へ・オレンジ帯の中） */
+.infra{margin-top:clamp(36px,5vw,56px)}
+.infra-lead{font-weight:700;font-size:clamp(15px,1.5vw,18px);line-height:1.8;margin-bottom:26px}
+.infra-dia{display:grid;grid-template-columns:minmax(220px,.8fr) 1.6fr;align-items:center}
+.infra-core{background:var(--ink);color:#fff;border-radius:var(--radius);padding:32px 28px;box-shadow:var(--shadow)}
+.infra-core small{font:700 11px var(--en);letter-spacing:.22em;color:var(--orange)}
+.infra-core b{display:block;font-size:clamp(24px,2.6vw,34px);font-weight:900;line-height:1.25;margin-top:8px}
+.infra-core ul{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;list-style:none;padding:0}
+.infra-core li{border:1px solid rgba(255,255,255,.3);border-radius:999px;padding:3px 14px;font-size:13px;font-weight:700}
+.infra-list{list-style:none;margin:0;padding:0 0 0 56px;display:grid;gap:10px;position:relative}
+.infra-list::before{content:"";position:absolute;left:28px;top:26px;bottom:26px;border-left:2px dashed var(--ink)}
+.infra-list::after{content:"";position:absolute;left:0;top:50%;width:28px;border-top:3px solid var(--ink)}
+.infra-list li{position:relative;display:grid;grid-template-columns:34px auto 1fr;align-items:center;gap:12px;background:#fff;border-radius:12px;padding:14px 20px}
+.infra-list li::before{content:"";position:absolute;left:-28px;top:50%;width:28px;border-top:2px dashed var(--ink)}
+.infra-list li i{font:800 13px var(--en);color:var(--orange-d);font-style:normal}
+.infra-list li b{font-size:16px;font-weight:900}
+.infra-list li span{font-size:13px;opacity:.65}
+.infra-list li.hot{background:var(--ink);color:#fff}
+.infra-list li.hot i{color:var(--orange)}
+.infra-list li.hot span{opacity:.75}
+.infra + .nums-grid{margin-top:clamp(44px,5vw,64px)}
+
+/* ③ ある1日の配達網の動き */
+.df-band{display:grid;grid-template-columns:2fr 3fr;gap:8px;margin-bottom:30px}
+.df-band span{font:700 11px var(--en);letter-spacing:.2em;padding:8px 14px;border-radius:999px;text-align:center;white-space:nowrap}
+.df-band .night{background:var(--ink);color:rgba(255,255,255,.75)}
+.df-band .day{background:var(--paper);color:#5b6678;border:1px solid #e3e6ec}
+.df-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);position:relative}
+.df-list::before,.df-list::after{content:"";position:absolute;left:0;top:9px;height:3px;border-radius:2px}
+.df-list::before{right:0;background:#e3e6ec}
+.df-list::after{width:40%;background:var(--ink)}
+.df-list li{position:relative;padding:38px 16px 0 0}
+.df-list li::before{content:"";position:absolute;left:0;top:0;width:21px;height:21px;border-radius:50%;background:#fff;border:3px solid var(--ink);z-index:1}
+.df-list li.n::before{background:var(--ink)}
+.df-list li.main::before{background:var(--orange);border-color:var(--orange);box-shadow:0 0 0 7px rgba(244,144,60,.25)}
+.df-list .t{font:900 clamp(26px,2.8vw,38px)/1 var(--en);letter-spacing:-.02em}
+.df-list li.main .t{color:var(--orange-d)}
+.df-list b{display:block;margin-top:10px;font-size:16px;font-weight:900}
+.df-list span{display:block;margin-top:2px;font-size:13px;line-height:1.6;color:#5b6678}
+
+/* ⑦ 現場 → AI → 現場 の循環（AI事業部） */
+.loop{margin-top:clamp(56px,7vw,90px);background:var(--ink);color:#fff;border-radius:28px;padding:clamp(28px,4vw,48px)}
+.loop-title{font-weight:900;font-size:clamp(20px,2.4vw,28px);line-height:1.4;margin-bottom:30px}
+.loop-title span{display:block;font:700 11px var(--en);letter-spacing:.24em;color:var(--orange);margin-bottom:8px}
+.loop-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:36px}
+.loop-list li{position:relative;background:rgba(255,255,255,.06);border:1px solid var(--line);border-radius:16px;padding:22px 20px}
+.loop-list li:not(:last-child)::after{content:"→";position:absolute;right:-28px;top:50%;transform:translateY(-50%);font:800 20px/1 var(--en);color:var(--orange)}
+.loop-list li.hot{background:var(--orange);border-color:var(--orange);color:var(--ink)}
+.loop-list i{display:block;font:900 32px/1 var(--en);font-style:normal;color:transparent;-webkit-text-stroke:1.2px var(--orange)}
+.loop-list li.hot i{-webkit-text-stroke-color:var(--ink)}
+.loop-list b{display:block;margin-top:12px;font-size:17px;font-weight:900}
+.loop-list span{display:block;margin-top:4px;font-size:13px;line-height:1.7;opacity:.78}
+.loop-back{margin:20px 12% 0;border:2px dashed rgba(244,144,60,.65);border-top:0;border-radius:0 0 22px 22px;padding:16px 12px 14px;text-align:center;font-weight:700;font-size:14px;color:var(--orange)}
+.loop-back span{font-size:20px;margin-right:8px;vertical-align:-2px}
+
+@media (max-width:1024px){
+  .loop-list{grid-template-columns:1fr 1fr;gap:16px}
+  .loop-list li::after{display:none}
+  .loop-back{margin:20px 0 0}
+}
+@media (max-width:760px){
+  .infra-dia{grid-template-columns:1fr}
+  .infra-list{padding:22px 0 0 34px}
+  .infra-list::before{left:14px;top:0;bottom:26px}
+  .infra-list::after{display:none}
+  .infra-list li{grid-template-columns:28px 1fr;gap:2px 10px;padding:12px 16px}
+  .infra-list li::before{left:-20px;width:20px}
+  .infra-list li span{grid-column:2}
+  .df-band{display:none}
+  .df-list{grid-template-columns:1fr;gap:24px;padding-left:38px}
+  .df-list::before,.df-list::after{left:9px;top:4px;width:3px;height:auto}
+  .df-list::before{bottom:4px}
+  .df-list::after{height:36%}
+  .df-list li{padding:0}
+  .df-list li::before{left:-38px;top:4px}
+  .df-list li.n .t::after{content:"夜明け前";font:700 11px var(--jp);color:#fff;background:var(--ink);border-radius:999px;padding:3px 10px;margin-left:10px;vertical-align:6px;letter-spacing:0}
+  .loop-list{grid-template-columns:1fr;gap:30px}
+  .loop-list li:not(:last-child)::after{display:block;content:"↓";right:auto;left:50%;top:auto;bottom:-26px;transform:translateX(-50%)}
+  .loop-back{border-top:2px dashed rgba(244,144,60,.65);border-radius:16px}
+}
+@media (prefers-reduced-motion:reduce){ .loop-list li,.infra-list li{transition:none} }

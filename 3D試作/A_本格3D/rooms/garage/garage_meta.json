@@ -1,0 +1,79 @@
+{
+  "room": "garage",
+  "camera": {
+    "pos": [
+      2.5,
+      1.7,
+      9.4
+    ],
+    "look": [
+      -0.5,
+      1.2,
+      -1.2
+    ],
+    "fov": 43.7791135398094
+  },
+  "panelSpot": [
+    2.6,
+    0,
+    3.0
+  ],
+  "bounds": {
+    "min": [
+      -4.099999904632568,
+      -0.1899999976158142,
+      -5.039999961853027
+    ],
+    "max": [
+      4.099999904632568,
+      3.9099998474121094,
+      6.449999809265137
+    ]
+  },
+  "bakeMinutes": 9.67,
+  "glbMB": 1.09,
+  "lightmaps": {
+    "Garage_architecture": "garage_lightmap_architecture.webp",
+    "Garage_details": "garage_lightmap_details.webp",
+    "Garage_floor": "garage_lightmap_floor.webp",
+    "Garage_furniture": "garage_lightmap_furniture.webp"
+  },
+  "lightmapIntensity": 12.566370614359172,
+  "lightmapDecodeGain": 4.0,
+  "lightmapExcludedMaterials": [
+    "Display_*"
+  ],
+  "lightmapTexCoord": 1,
+  "lightmapColorSpace": "sRGB",
+  "lightmapFlipY": false,
+  "lightmapResolution": 1024,
+  "triangles": 41775,
+  "bytes": {
+    "glb": 1090308,
+    "lightmaps": 2252698,
+    "runtimeTotal": 3343006
+  },
+  "assets": {
+    "polyhaven:cardboard_box_01:None:True:(0.08, 0.08, 0.08)": {
+      "key": "cardboard_box_01",
+      "kind": "polyhaven",
+      "trianglesBefore": 16952,
+      "trianglesAfter": 299,
+      "instances": 105
+    },
+    "polyhaven:hand_truck:None:True:(0.08, 0.08, 0.08)": {
+      "key": "hand_truck",
+      "kind": "polyhaven",
+      "trianglesBefore": 13220,
+      "trianglesAfter": 2500,
+      "instances": 1
+    },
+    "polyhaven:industrial_storage_cart:None:True:(0.08, 0.08, 0.08)": {
+      "key": "industrial_storage_cart",
+      "kind": "polyhaven",
+      "trianglesBefore": 18902,
+      "trianglesAfter": 3000,
+      "instances": 1
+    }
+  }
+}

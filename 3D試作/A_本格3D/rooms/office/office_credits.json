@@ -1,0 +1,65 @@
+[
+  {
+    "file": "office_assets.zip",
+    "memo": "机・モニター・小物のセット",
+    "title": "Office - Assets",
+    "author": "Evan Petrov",
+    "url": "https://sketchfab.com/3d-models/16c1a779bb0a4055a26367741d39e059",
+    "license": "CC Attribution",
+    "modifications": "Selected components, rescaled, logo/text materials replaced; geometry reduced where noted in office_meta.json."
+  },
+  {
+    "file": "office_chair.zip",
+    "memo": "黒いメッシュの事務椅子",
+    "title": "M1086-02 office chair",
+    "author": "rongphuongbacfurniture",
+    "url": "https://sketchfab.com/3d-models/427327f345414925af3eee7d29dfce6d",
+    "license": "CC Attribution",
+    "modifications": "Selected components, rescaled, logo/text materials replaced; geometry reduced where noted in office_meta.json."
+  },
+  {
+    "file": "printer.zip",
+    "memo": "複合機",
+    "title": "HP Color Laser Jet Pro MFP 400",
+    "author": "Mixmamo.studio:   An effortless 3D collections.",
+    "url": "https://sketchfab.com/3d-models/f9f01bd8b75c47c1abeb68a72ef623cb",
+    "license": "CC Attribution",
+    "modifications": "Selected components, rescaled, logo/text materials replaced; geometry reduced where noted in office_meta.json."
+  },
+  {
+    "file": "laptop.zip",
+    "memo": "ノートPC",
+    "title": "Laptop | Free Download",
+    "author": "JonParrish",
+    "url": "https://sketchfab.com/3d-models/9eb033212e384f9c94ad3d22e8b4215e",
+    "license": "CC Attribution",
+    "modifications": "Selected components, rescaled, logo/text materials replaced; geometry reduced where noted in office_meta.json."
+  },
+  {
+    "file": "monitor.zip",
+    "memo": "モニター",
+    "title": "Office Computer",
+    "author": "sebodeweb",
+    "url": "https://sketchfab.com/3d-models/9403093258264563a89d708b906f1b47",
+    "license": "CC Attribution",
+    "modifications": "Selected components, rescaled, logo/text materials replaced; geometry reduced where noted in office_meta.json."
+  },
+  {
+    "file": "phone.zip",
+    "memo": "電話",
+    "title": "Office Phone",
+    "author": "maxdragonn",
+    "url": "https://sketchfab.com/3d-models/4176a01b6d0b4d13ad165c0df278a6b5",
+    "license": "CC Attribution",
+    "modifications": "Selected components, rescaled, logo/text materials replaced; geometry reduced where noted in office_meta.json."
+  },
+  {
+    "file": "doc_tray.zip",
+    "memo": "書類トレー",
+    "title": "Document Letter Tray , Documents Organizer",
+    "author": "YouniqueĪdeaStudio",
+    "url": "https://sketchfab.com/3d-models/f5c4c6638ea844fa936d43e60b83073f",
+    "license": "CC Attribution",
+    "modifications": "Selected components, rescaled, logo/text materials replaced; geometry reduced where noted in office_meta.json."
+  }
+]

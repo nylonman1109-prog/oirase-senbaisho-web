@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>C 断面イラスト｜おいらせ専売所 試作</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Poppins:wght@600;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../_common/ui.css">
+<style>
+  /* 1600×1000 の絵を1枚置き、カメラ（拡大・移動）で部屋から部屋へ寄っていく */
+  .stage{background:linear-gradient(#0B2545 50%,#55623f 50%)}
+  .world{position:absolute;left:0;top:0;width:1600px;height:1000px;transform-origin:0 0;will-change:transform}
+  .world svg,.world img{position:absolute;inset:0;width:100%;height:100%}
+  .world img{object-fit:cover}
+  .tag{position:absolute;transform:translate(-50%,-100%);background:#F4903C;color:#0A0E17;font:800 13px/1 "Noto Sans JP",sans-serif;
+    padding:7px 11px;border-radius:999px;white-space:nowrap;opacity:0;transition:opacity .4s,transform .4s;box-shadow:0 6px 16px rgba(0,0,0,.25)}
+  .tag::after{content:"";position:absolute;left:50%;bottom:-6px;margin-left:-6px;border:6px solid transparent;border-bottom:0;border-top-color:#F4903C}
+  .tag.on{opacity:1;transform:translate(-50%,-115%)}
+  .board-art{position:absolute;object-fit:cover;border-radius:6px}
+  .bp.empty{cursor:default;padding:0;box-shadow:0 2px 5px rgba(0,0,0,.25);background:#FFF3DE}
+  .bp.empty.fl{background:#F4903C}
+  .bp.fl{padding:3px}
+  /* コルクボードに貼った写真（絵の上に重ねる。タップで拡大） */
+  .bp{all:unset;position:absolute;cursor:zoom-in;background:#fff;padding:4px 4px 12px;box-shadow:0 3px 8px rgba(0,0,0,.35);transition:transform .2s}
+  .bp img{display:block;width:100%;height:100%;object-fit:cover}
+  .bp::before{content:"";position:absolute;left:50%;top:-4px;width:9px;height:9px;margin-left:-4.5px;border-radius:50%;background:#E04A3A;box-shadow:0 1px 2px rgba(0,0,0,.4)}
+  .bp:hover{z-index:2;transform:var(--r) scale(1.08)}
+  .monitor{animation:glow 2.4s ease-in-out infinite}
+  .monitor:nth-of-type(2n){animation-delay:.8s}
+  @keyframes glow{50%{opacity:.6}}
+  .van{animation:idle 3s ease-in-out infinite}
+  @keyframes idle{50%{transform:translateY(1.5px)}}
+  @media (prefers-reduced-motion:reduce){ .monitor,.van{animation:none} }
+</style>
+</head>
+<body>
+<div class="stage" id="stage">
+  <div class="world" id="world">
+    <!-- 仮の断面図（Claude作）。Geminiの絵 ../素材/C/C01_danmen.jpg があればその上に重なる -->
+    <svg viewBox="0 0 1600 1000" aria-hidden="true">
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0B2545"/><stop offset=".55" stop-color="#5b6f9a"/><stop offset=".85" stop-color="#F4A35C"/></linearGradient>
+        <linearGradient id="win" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7d93c4"/><stop offset="1" stop-color="#f7b57a"/></linearGradient>
+      </defs>
+      <rect width="1600" height="1000" fill="url(#sky)"/>
+      <circle cx="1420" cy="840" r="70" fill="#FFD7A0" opacity=".9"/>
+      <!-- 遠くの家並み -->
+      <g fill="#3a4766" opacity=".8">
+        <path d="M0 860V800l40-30 40 30v60zM90 860v-50l50-36 50 36v50zM1340 860v-55l45-32 45 32v55zM1450 860v-45l40-28 40 28v45zM1530 860v-60l35-25 35 25v60z"/>
+      </g>
+      <rect y="860" width="1600" height="140" fill="#55623f"/>
+      <rect y="900" width="1600" height="46" fill="#3B3F46"/>
+      <path d="M0 923H1600" stroke="#cfd3da" stroke-width="3" stroke-dasharray="30 26"/>
+
+      <!-- 建物の外枠 -->
+      <rect x="290" y="250" width="1020" height="620" fill="#0B2545"/>
+      <rect x="280" y="236" width="1040" height="24" rx="4" fill="#13335C"/>
+      <!-- 屋上：手すり・旗・朝日を見る2人 -->
+      <path d="M300 236V196M1300 236V196M300 200H1300" stroke="#13335C" stroke-width="6"/>
+      <path d="M400 236V96" stroke="#13335C" stroke-width="6"/><path d="M403 100h70l-12 22 12 22h-70z" fill="#F4903C"/>
+      <g fill="#0A0E17"><circle cx="760" cy="168" r="13"/><rect x="746" y="182" width="28" height="54" rx="12"/><circle cx="810" cy="164" r="13"/><rect x="796" y="178" width="28" height="58" rx="12"/></g>
+      <path d="M786 150l6-12 6 12" stroke="#F4903C" stroke-width="3" fill="none"/>
+
+      <!-- 2F 床・1F床 -->
+      <rect x="300" y="260" width="1000" height="280" fill="#F5EFE4"/>
+      <rect x="300" y="560" width="1000" height="300" fill="#F1E9DA"/>
+      <rect x="290" y="540" width="1020" height="20" fill="#13335C"/>
+      <rect x="300" y="840" width="1000" height="20" fill="#C9B79C"/>
+      <rect x="300" y="522" width="1000" height="18" fill="#D9C9AE"/>
+      <!-- 仕切りと階段 -->
+      <rect x="752" y="260" width="10" height="280" fill="#d8cdbb"/><rect x="838" y="260" width="10" height="280" fill="#d8cdbb"/>
+      <rect x="752" y="560" width="10" height="120" fill="#d8cdbb"/><rect x="838" y="560" width="10" height="120" fill="#d8cdbb"/>
+      <g fill="#A9825A">
+        <rect x="762" y="820" width="76" height="20"/><rect x="762" y="790" width="64" height="30"/><rect x="762" y="760" width="52" height="30"/>
+        <rect x="762" y="730" width="40" height="30"/><rect x="762" y="700" width="28" height="30"/><rect x="774" y="540" width="64" height="16"/>
+      </g>
+      <path d="M770 840L838 560" stroke="#8a6a48" stroke-width="5"/>
+      <g fill="#A9825A"><rect x="790" y="680" width="48" height="16"/><rect x="802" y="640" width="36" height="16"/><rect x="814" y="600" width="24" height="16"/></g>
+
+      <!-- 1F左：折込場 -->
+      <rect x="320" y="580" width="140" height="90" rx="6" fill="url(#win)"/>
+      <rect x="340" y="740" width="390" height="22" rx="4" fill="#A9825A"/>
+      <rect x="352" y="762" width="14" height="78" fill="#8a6a48"/><rect x="704" y="762" width="14" height="78" fill="#8a6a48"/>
+      <g fill="#fff" stroke="#d8d4c8" stroke-width="2">
+        <rect x="360" y="712" width="60" height="28"/><rect x="430" y="700" width="60" height="40"/><rect x="500" y="716" width="60" height="24"/>
+        <rect x="600" y="690" width="70" height="50"/><rect x="606" y="676" width="58" height="14"/>
+      </g>
+      <g fill="#0B2545"><circle cx="470" cy="650" r="16"/><rect x="450" y="668" width="40" height="70" rx="16"/><circle cx="600" cy="640" r="16"/><rect x="580" y="658" width="40" height="80" rx="16"/></g>
+      <rect x="560" y="582" width="160" height="64" rx="6" fill="#fff" opacity=".9"/><path d="M576 600h128M576 614h100M576 628h116" stroke="#c8c3b6" stroke-width="5"/>
+
+      <!-- 宅配・物流（1F右）：ガレージ。横向きの軽バン、開いた後ろのドア、段ボールを積み込む人 -->
+      <rect x="1220" y="590" width="60" height="44" rx="4" fill="url(#win)"/>
+      <g class="van">
+        <path d="M900 730h200a30 30 0 0 1 30 30v50h-240v-70a10 10 0 0 1 10-10z" fill="#fff"/>
+        <path d="M1062 740h46a14 14 0 0 1 14 14v26h-60z" fill="#2b3a52"/>
+        <rect x="890" y="790" width="248" height="10" fill="#F4903C"/>
+        <circle cx="950" cy="818" r="20" fill="#0A0E17"/><circle cx="1080" cy="818" r="20" fill="#0A0E17"/>
+        <circle cx="950" cy="818" r="8" fill="#888"/><circle cx="1080" cy="818" r="8" fill="#888"/>
+      </g>
+      <rect x="893" y="738" width="10" height="62" fill="#5d4c3c"/>
+      <path d="M893 730l-22 -6v80l22 6z" fill="#f4f4f4" stroke="#d6d0c2" stroke-width="2"/>
+      <g fill="#C69C6D" stroke="#a57d52" stroke-width="2"><rect x="1160" y="800" width="40" height="38"/><rect x="1160" y="762" width="40" height="38"/><rect x="1204" y="804" width="36" height="34"/><rect x="1246" y="800" width="40" height="38"/></g>
+      <g fill="#0B2545"><circle cx="848" cy="700" r="15"/><rect x="830" y="716" width="36" height="76" rx="15"/><rect x="836" y="790" width="10" height="50"/><rect x="852" y="790" width="10" height="50"/></g>
+      <rect x="852" y="724" width="34" height="28" fill="#C69C6D" stroke="#a57d52" stroke-width="2"/>
+
+      <!-- まごころサポート（2F左）：大きなコルクボード（16:9）。写真とチラシは JS で貼る -->
+      <rect x="350" y="276" width="360" height="203" rx="8" fill="#B7895A" stroke="#8a6a48" stroke-width="6"/>
+      <rect x="560" y="490" width="120" height="10" rx="4" fill="#A9825A"/><rect x="570" y="500" width="7" height="22" fill="#8a6a48"/><rect x="664" y="500" width="7" height="22" fill="#8a6a48"/>
+      <path d="M328 520v-30" stroke="#5c4a3a" stroke-width="5"/><circle cx="328" cy="474" r="18" fill="#4F7A4A"/>
+      <g fill="#0B2545"><circle cx="733" cy="468" r="13"/><rect x="718" y="481" width="30" height="41" rx="12"/></g>
+      <rect x="722" y="487" width="22" height="35" rx="5" fill="#F4903C"/>
+
+      <!-- AI事業部（2F右）：少し暗い部屋で、1人がモニター3枚に向かって黙々と作業 -->
+      <rect x="848" y="260" width="452" height="262" fill="#1c2336"/>
+      <rect x="848" y="510" width="452" height="12" fill="#151b2a"/>
+      <ellipse cx="1074" cy="420" rx="190" ry="90" fill="#3a8cff" opacity=".16"/>
+      <rect x="1180" y="300" width="80" height="60" rx="4" fill="#2a3346"/>
+      <g fill="#3a8cff">
+        <path class="monitor" d="M962 382l66 6v46l-66 -2z"/>
+        <rect class="monitor" x="1038" y="380" width="72" height="50" rx="3"/>
+        <path class="monitor" d="M1120 388l66 -6v50l-66 2z"/>
+      </g>
+      <g fill="#0A0E17"><rect x="992" y="432" width="8" height="10"/><rect x="1070" y="430" width="8" height="12"/><rect x="1150" y="432" width="8" height="10"/></g>
+      <rect x="950" y="442" width="250" height="10" rx="3" fill="#e6e9ef"/>
+      <rect x="962" y="452" width="8" height="70" fill="#7d8698"/><rect x="1180" y="452" width="8" height="70" fill="#7d8698"/>
+      <g fill="#0B2545"><circle cx="1074" cy="452" r="15"/><rect x="1056" y="468" width="36" height="46" rx="14"/></g>
+      <rect x="1050" y="490" width="48" height="32" rx="6" fill="#0A0E17"/>
+    </svg>
+    <img id="art" src="../素材/C/C01_danmen.jpg" alt="" onerror="this.remove()">
+  </div>
+</div>
+
+<script type="module">
+// C：断面イラスト1枚を、スクロールで部屋から部屋へズームしていく。
+// 部屋の位置（ROOMS）は 1600×1000 の絵の上の座標 [x, y, 幅, 高さ]。
+// Geminiの絵に差し替えたら、絵に合わせてここの数字だけ直す。
+import { SCENES, boardLayout, setupScroll, lerp, dwell, openPhoto } from '../_common/scenes.js';
+
+const ROOMS = {
+  gaikan:   [120, 40, 1360, 900],
+  orikomi:  [300, 560, 460, 300],
+  garage:   [840, 560, 460, 300],
+  magokoro: [300, 260, 460, 280],
+  board:    [350, 276, 360, 203, 1],   // コルクボード（BOARD_RECTと同じ）。最後の1 ＝ 画面いっぱいに映す
+  ai:       [840, 260, 460, 280],
+  okujo:    [340, 60, 600, 220],
+  menu:     [0, 0, 1600, 1000],
+};
+// 部屋の上に出す札（ラベル）の位置
+const TAGS = { orikomi: [530, 600, '新聞・折込事業部'], garage: [1010, 600, '宅配・物流事業部'], magokoro: [530, 278, 'まごころサポート事業部'], ai: [1070, 300, 'AI事業部'] };
+
+const world = document.getElementById('world');
+const tagEls = {};
+for (const [id, [x, y, t]] of Object.entries(TAGS)) {
+  const el = document.createElement('span'); el.className = 'tag'; el.textContent = t;
+  el.style.left = x + 'px'; el.style.top = y + 'px'; world.appendChild(el); tagEls[id] = el;
+}
+
+// コルクボード：絵の上の位置 [x, y, 幅, 高さ]（16:9）。Geminiの絵に替えたら、絵のボードに合わせてここだけ直す
+const BOARD_RECT = [350, 276, 360, 203];
+// ボードのアップ用の高解像度の絵（../素材/C/C02_board.jpg）。あればボードの位置にぴったり重ねる
+const art = document.createElement('img');
+art.className = 'board-art'; art.alt = '';
+art.style.cssText = `left:${BOARD_RECT[0]}px;top:${BOARD_RECT[1]}px;width:${BOARD_RECT[2]}px;height:${BOARD_RECT[3]}px`;
+art.onerror = () => art.remove();
+art.src = '../素材/C/C02_board.jpg';
+world.appendChild(art);
+// 写真・チラシを貼り位置に貼る（貼り位置は _common/scenes.js の SLOTS。A・Geminiの絵と共通）
+for (const it of boardLayout()) {
+  const [x, y, w, h, r] = it.slot, [bx, by, bw, bh] = BOARD_RECT;
+  const b = document.createElement('button');
+  b.className = 'bp' + (it.flyer ? ' fl' : '') + (it.src ? '' : ' empty');
+  b.style.cssText = `left:${bx + x * bw}px;top:${by + y * bh}px;width:${w * bw}px;height:${h * bh}px;--r:rotate(${r}deg);transform:var(--r)`;
+  if (it.src) {
+    b.setAttribute('aria-label', it.cap + 'を大きく見る');
+    b.innerHTML = `<img src="${it.src}" alt="${it.cap}">`;
+    b.addEventListener('click', () => openPhoto(it.i));
+  } else { b.tabIndex = -1; b.setAttribute('aria-hidden', 'true'); }
+  world.appendChild(b);
+}
+
+const key = SCENES.map(s => { const r = ROOMS[s.id]; return [r[0], r[1], r[2], r[3], r[4] || 0]; }); // [x,y,幅,高さ,画面いっぱい度]
+let cur = key[0].slice(), goal = key[0].slice();
+
+function viewArea(full) {
+  const w = innerWidth, h = innerHeight;
+  const n = w < 760 ? { x: 0, y: 60, w, h: h * .56 }                       // スマホ：上半分に部屋、下に文面
+    : (l => ({ x: l, y: 70, w: w - l - 70, h: h - 110 }))(Math.min(460, w * .38) + 40); // PC：右側に部屋、左に文面
+  const f = { x: 0, y: 64, w, h: h - 64 - (w < 760 ? 130 : 96) };        // ボード：画面いっぱい（下に小さいカード）
+  return { x: lerp(n.x, f.x, full), y: lerp(n.y, f.y, full), w: lerp(n.w, f.w, full), h: lerp(n.h, f.h, full) };
+}
+function place(r) {
+  const a = viewArea(r[4]);
+  const s = Math.min(a.w / r[2], a.h / r[3]);
+  const sc = Math.max(s, innerWidth / 1600);                               // 横は必ず絵で埋める（上下のすき間は空と地面の色）
+  let tx = a.x + a.w / 2 - (r[0] + r[2] / 2) * sc;
+  let ty = a.y + a.h / 2 - (r[1] + r[3] / 2) * sc;
+  tx = Math.min(0, Math.max(innerWidth - 1600 * sc, tx));
+  world.style.transform = `translate(${tx}px,${ty}px) scale(${sc})`;
+}
+
+setupScroll({
+  label: 'C 断面イラスト',
+  onProgress(p) {
+    const i = Math.min(key.length - 2, Math.floor(p)), t = dwell(p - i);
+    goal = key[i].map((v, k) => lerp(v, key[i + 1][k], t));
+    // 移動の途中は少し引いて、建物全体の中での位置関係を見せる
+    const out = Math.sin(t * Math.PI) * .35;
+    const o = key[i][4] || key[i + 1][4] ? 0 : out;                        // ボードへ寄るときは引かない
+    goal = [goal[0] - goal[2] * o / 2, goal[1] - goal[3] * o / 2, goal[2] * (1 + o), goal[3] * (1 + o), goal[4]];
+    const active = SCENES[Math.min(SCENES.length - 1, Math.floor(p + .5))].id;
+    for (const [id, el] of Object.entries(tagEls)) el.classList.toggle('on', id === active);
+  }
+});
+
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+(function loop() {
+  cur = cur.map((v, k) => reduce ? goal[k] : v + (goal[k] - v) * .09);
+  place(cur);
+  requestAnimationFrame(loop);
+})();
+addEventListener('resize', () => place(cur));
+</script>
+</body>
+</html>

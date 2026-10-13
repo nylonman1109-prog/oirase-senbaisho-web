@@ -1,0 +1,138 @@
+{
+  "room": "magokoro",
+  "camera": {
+    "pos": [
+      -1.9,
+      1.6,
+      -1.25
+    ],
+    "look": [
+      3.9,
+      1.55,
+      0.45
+    ],
+    "fov": 56.35718021991835
+  },
+  "panelSpot": [
+    2.3,
+    0,
+    3.2
+  ],
+  "bounds": {
+    "min": [
+      -4.039999961853027,
+      -0.18000000715255737,
+      -5.039999961853027
+    ],
+    "max": [
+      4.039999961853027,
+      3.8899998664855957,
+      4.999999523162842
+    ]
+  },
+  "bakeMinutes": 14.76,
+  "glbMB": 2.075,
+  "lightmaps": {
+    "Magokoro_architecture": "magokoro_lightmap_architecture.webp",
+    "Magokoro_details": "magokoro_lightmap_details.webp",
+    "Magokoro_floor": "magokoro_lightmap_floor.webp",
+    "Magokoro_furniture": "magokoro_lightmap_furniture.webp",
+    "Magokoro_plants": "magokoro_lightmap_plants.webp"
+  },
+  "lightmapIntensity": 12.566370614359172,
+  "lightmapDecodeGain": 4.0,
+  "lightmapExcludedMaterials": [
+    "Display_*"
+  ],
+  "lightmapTexCoord": 1,
+  "lightmapColorSpace": "sRGB",
+  "lightmapFlipY": false,
+  "lightmapResolution": 1024,
+  "triangles": 70130,
+  "bytes": {
+    "glb": 2074732,
+    "lightmaps": 3074238,
+    "runtimeTotal": 5148970
+  },
+  "assets": {
+    "sketchfab:office_chair:None:False:(0.03, 0.032, 0.035):True": {
+      "key": "office_chair",
+      "kind": "sketchfab",
+      "trianglesBefore": 39850,
+      "trianglesAfter": 6200,
+      "instances": 4
+    },
+    "sketchfab:printer:None:False:(0.75, 0.76, 0.74):False": {
+      "key": "printer",
+      "kind": "sketchfab",
+      "trianglesBefore": 7616,
+      "trianglesAfter": 4000,
+      "instances": 1
+    },
+    "sketchfab:doc_tray:None:False:(0.04, 0.045, 0.048):False": {
+      "key": "doc_tray",
+      "kind": "sketchfab",
+      "trianglesBefore": 11428,
+      "trianglesAfter": 3000,
+      "instances": 1
+    },
+    "sketchfab:phone:None:False:(0.06, 0.065, 0.07):False": {
+      "key": "phone",
+      "kind": "sketchfab",
+      "trianglesBefore": 4786,
+      "trianglesAfter": 2499,
+      "instances": 1
+    },
+    "sketchfab:snake_plant:None:True:(0.08, 0.08, 0.08):False": {
+      "key": "snake_plant",
+      "kind": "sketchfab",
+      "trianglesBefore": 25000,
+      "trianglesAfter": 7000,
+      "instances": 3
+    },
+    "polyhaven:pachira_aquatica_01:None:True:(0.08, 0.08, 0.08):False": {
+      "key": "pachira_aquatica_01",
+      "kind": "polyhaven",
+      "trianglesBefore": 28105,
+      "trianglesAfter": 6999,
+      "instances": 1
+    },
+    "polyhaven:potted_plant_02:None:True:(0.08, 0.08, 0.08):False": {
+      "key": "potted_plant_02",
+      "kind": "polyhaven",
+      "trianglesBefore": 69806,
+      "trianglesAfter": 5000,
+      "instances": 1
+    }
+  },
+  "board": {
+    "center": [
+      3.845,
+      1.78,
+      -0.35
+    ],
+    "normal": [
+      -1,
+      0,
+      0
+    ],
+    "right": [
+      0,
+      0,
+      1
+    ],
+    "up": [
+      0,
+      1,
+      0
+    ],
+    "size": [
+      4.2,
+      2.3625000000000003
+    ],
+    "fill": [
+      4.4,
+      2.5625000000000004
+    ]
+  }
+}
